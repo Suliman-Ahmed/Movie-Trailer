@@ -1,50 +1,29 @@
 class TrailerModel {
-  int id;
-  List<ResultsTr> results;
+  List<ResultsTr> results = [];
 
-  TrailerModel({this.id, this.results});
-
-  TrailerModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    if (json['results'] != null) {
-      results = new List<ResultsTr>();
-      json['results'].forEach((v) {
-        results.add(new ResultsTr.fromJson(v));
-      });
+  TrailerModel.fromJson(Map<String, dynamic> parsedJson) {
+    List<ResultsTr> temp = [];
+    for (var i = 0; i < parsedJson['results'].length; i++) {
+      ResultsTr result = ResultsTr(parsedJson['results'][i]);
+      temp.add(result);
     }
+
+    results = temp;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.results != null) {
-      data['results'] = this.results.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  List<ResultsTr> get getTrailers => results;
 }
 
 class ResultsTr {
-  String id;
   String key;
   String name;
 
-  ResultsTr(
-      {this.id,
-      this.key,
-      this.name,});
-
-  ResultsTr.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    key = json['key'];
-    name = json['name'];
+  ResultsTr(result){
+    key = result['key'].toString();
+    name = result['name'].toString(); 
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['key'] = this.key;
-    data['name'] = this.name;
-    return data;
-  }
+
+  String get getKey => key;
+  String get getName => name;
 }

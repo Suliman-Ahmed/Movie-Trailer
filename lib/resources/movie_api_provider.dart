@@ -12,9 +12,8 @@ class MovieApiProvider {
   final baseURL = "https://api.themoviedb.org/3/";
 
   Future<ItemModel> fetchMovieList(bool isRecent) async {
-    print('object');
+    print('All Movies');
 
-    try {
       final response = await client.get(
           baseURL+'movie/now_playing?api_key=$apikey');
       if (response.statusCode == 200) {
@@ -24,26 +23,21 @@ class MovieApiProvider {
       } else {
         throw Exception('Faild to load the page');
       }
-    } catch (e) {
-      return e;
-    }
+    
   }
 
   Future<ItemModel> fetchPopularMovieList(bool isRecent) async {
-    print('object');
-    try {
+    print('pop');
+  
       final response = await client.get(
           baseURL+'movie/popular?api_key=$apikey');
       if (response.statusCode == 200) {
         print(response.body.toString());
-        print('Success');
+        print('pop Success');
         return ItemModel.fromJson(jsonDecode(response.body),isRecent);
       } else {
         throw Exception('Faild to load the page');
       }
-    } catch (e) {
-      return e;
-    }
   }
 
   Future<GenreModel> fetchGenreList() async {
@@ -65,12 +59,14 @@ class MovieApiProvider {
 
 
   Future<TrailerModel> fetchTrailers(int movieId) async {
-    final response = await client.get(baseURL+'/movie/$movieId/videos?api_key=$apikey');
+    print('ENTERED Trailers');
+    final response = await client.get(baseURL+'movie/$movieId/videos?api_key=$apikey');
     print(response.body.toString());
     if (response.statusCode == 200) {
+      print('Trailes Load');
       return TrailerModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load genres');
+      throw Exception('Failed to load Trailers');
     }
   }
 }

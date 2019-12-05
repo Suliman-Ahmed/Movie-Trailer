@@ -42,6 +42,15 @@ class _ContentPageState extends State<ContentPage> {
       color: bgColor,
       child: Stack(
         children: <Widget>[
+          Positioned(
+              top: 20,
+              left: 50,
+              child: InkWell(
+                onTap:() => Navigator.pop(context),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: whiteColor,
+                  ))),
           Container(
               height: 340,
               decoration: BoxDecoration(
@@ -58,7 +67,7 @@ class _ContentPageState extends State<ContentPage> {
               child: Container(
                 margin: EdgeInsets.only(),
                 width: _width,
-                height: 120,
+                height: 140,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(stops: [
                   0.1,
@@ -80,6 +89,7 @@ class _ContentPageState extends State<ContentPage> {
             left: 20,
             child: Container(
               width: _width,
+              height: 140,
               child: Text(
                 widget.data.title,
                 style: TextStyle(color: whiteColor, fontSize: 20),
@@ -97,6 +107,7 @@ class _ContentPageState extends State<ContentPage> {
             right: 20,
             top: 360,
             child: Container(
+              margin: EdgeInsets.only(top: 20, bottom: 10),
               width: _width,
               height: 0.5,
               color: textColor,
@@ -105,6 +116,7 @@ class _ContentPageState extends State<ContentPage> {
           Positioned(
             top: 372,
             child: Container(
+                margin: EdgeInsets.only(top: 1, bottom: 10),
                 width: _width,
                 height: MediaQuery.of(context).size.height - 370,
                 child: SingleChildScrollView(
@@ -245,14 +257,15 @@ class _ContentPageState extends State<ContentPage> {
                                 '${widget.data.overview}',
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 14),
-                              )
+                              ),
+                              //Trailers
+
+                              PreloadTraileContent(widget.data.id),
                             ],
                           ),
                         ),
                       ),
                       ////////////////////////////////////////////////////
-                      //Trailers
-                      
                     ],
                   ),
                 )),
@@ -273,14 +286,21 @@ class PreloadTraileContent extends StatefulWidget {
 class _PreloadTraileContentState extends State<PreloadTraileContent> {
   @override
   Widget build(BuildContext context) {
-    blocTrailer.fetchAllTrailers(widget.movieID);
+    print('Movie Id is ' + widget.movieID.toString());
+
+    blocTrailer.fetchAllTrailers2(widget.movieID);
     return StreamBuilder(
       stream: blocTrailer.allTrailersOfMovie,
       builder: (context, AsyncSnapshot<TrailerModel> snapshotTrailer) {
         if (snapshotTrailer.hasData) {
-          if (snapshotTrailer.data.results.length > 0) {
-            return TrailerPage(snapshotTrailer);
+          if (snapshotTrailer.data.results.length >= 1) {
+            print('Hi trailes');
+            return Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: (snapshotTrailer.data.results.length / 2) * 300.0,
+                child: TrailerPage(snapshotTrailer));
           } else {
+            print('NO trailes');
             return Text(
               'Not Found Trailer',
               style: TextStyle(color: whiteColor),

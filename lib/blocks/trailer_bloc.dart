@@ -8,9 +8,8 @@ class TrailerBloc {
 
   Observable<TrailerModel> get allTrailersOfMovie => trailerFetcher.stream;
 
-  fetchAllTrailers(int movieId) async {
-    var fetchAllTrailrs = repository.fetchAllTrailrs(movieId);
-    TrailerModel trailerModel = await fetchAllTrailrs;
+  fetchAllTrailers2(int movieId) async {
+    TrailerModel trailerModel = await  repository.fetchAllTrailrs(movieId);
     trailerFetcher.sink.add(trailerModel);
   }
 

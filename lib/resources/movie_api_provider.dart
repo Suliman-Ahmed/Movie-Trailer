@@ -11,7 +11,7 @@ class MovieApiProvider {
   final apikey = "ee3c37eddb9e95c458322266fe5fa346";
   final baseURL = "https://api.themoviedb.org/3/";
 
-  Future<ItemModel> fetchMovieList(bool isRecent) async {
+  Future<ItemModel> fetchMovieList(int isRecent) async {
     print('All Movies');
 
       final response = await client.get(
@@ -26,7 +26,7 @@ class MovieApiProvider {
     
   }
 
-  Future<ItemModel> fetchPopularMovieList(bool isRecent) async {
+  Future<ItemModel> fetchPopularMovieList(int isRecent) async {
     print('pop');
   
       final response = await client.get(
@@ -34,6 +34,20 @@ class MovieApiProvider {
       if (response.statusCode == 200) {
         print(response.body.toString());
         print('pop Success');
+        return ItemModel.fromJson(jsonDecode(response.body),isRecent);
+      } else {
+        throw Exception('Faild to load the page');
+      }
+  }
+
+  Future<ItemModel> fetchUpcomingMovies(int isRecent) async {
+    print('upcome');
+  
+      final response = await client.get(
+          baseURL+'movie/upcoming?api_key=$apikey');
+      if (response.statusCode == 200) {
+        print(response.body.toString());
+        print('upcome Success');
         return ItemModel.fromJson(jsonDecode(response.body),isRecent);
       } else {
         throw Exception('Faild to load the page');

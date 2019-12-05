@@ -5,7 +5,7 @@ class ItemModel {
 
   var result = [];
 
-  ItemModel.fromJson(Map<String, dynamic> parsedJson, bool isRecent) {
+  ItemModel.fromJson(Map<String, dynamic> parsedJson, int isRecent) {
     page = parsedJson['page'];
     total_results = parsedJson['total_results'];
     total_pages = parsedJson['total_pages'];
@@ -16,16 +16,20 @@ class ItemModel {
       temp.add(result);
     }
 
-    if (!isRecent) {
-      temp.sort((a, b) {
+    switch (isRecent) {
+      case 0:
+        temp.sort((a, b) {
         return a.popularity.compareTo(b.popularity);
       });
-    }else{
-      temp.sort((a, b) {
+        break;
+        case 1:
+        temp.sort((a, b) {
         return DateTime.parse(a.release_date).compareTo( DateTime.parse(b.release_date));
       });
-    }
-
+        break;
+        
+      default:
+    } 
     result = temp;
   }
 }
@@ -60,7 +64,7 @@ class Result {
     for (var i = 0; i < result['genre_ids'].length; i++) {
       genre_ids.add(result['genre_ids'][i]);
     }
-    backdrop_path = result['backdrop_path'].toString();
+    backdrop_path ='http://image.tmdb.org/t/p/w200//' +  result['backdrop_path'].toString();
     adult = result['adult'];
     overview = result['overview'].toString();
     release_date = result['release_date'].toString();

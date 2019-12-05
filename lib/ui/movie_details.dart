@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_trailer/Pages/trailer_page.dart';
 import 'package:flutter_movie_trailer/blocks/trailer_bloc.dart';
 import 'package:flutter_movie_trailer/models/item_model.dart';
 import 'package:flutter_movie_trailer/models/tailer_model.dart';
 import 'package:flutter_movie_trailer/resources/get_genre_item.dart';
 import 'package:flutter_movie_trailer/ui/colors.dart';
-import 'package:flutter_movie_trailer/ui/trailer_page.dart';
 
 class MovieDetail extends StatefulWidget {
   Result data;
@@ -102,17 +102,7 @@ class _ContentPageState extends State<ContentPage> {
             left: 10,
             child: GetGenreItems(widget.genres),
           ),
-          Positioned(
-            left: 20,
-            right: 20,
-            top: 360,
-            child: Container(
-              margin: EdgeInsets.only(top: 20, bottom: 10),
-              width: _width,
-              height: 0.5,
-              color: textColor,
-            ),
-          ),
+          
           Positioned(
             top: 372,
             child: Container(
@@ -122,6 +112,16 @@ class _ContentPageState extends State<ContentPage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
+                      //////////////////////////////////////////////////////////////////////
+                      Container(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 20),
+                          width: _width - 40,
+                          height: 0.5,
+                          color: textColor,
+                        ),
+                      ),
+                      //////////////////////////////////////////////////////////////////////
                       // Rating & Vote count and popularity
                       Container(
                         margin: EdgeInsets.only(left: 20),
@@ -134,6 +134,8 @@ class _ContentPageState extends State<ContentPage> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
+                                  //////////////////////////////////////////////////////////////////////
+                                  // Popularity
                                   Container(
                                     width: (_width - 80) / 3,
                                     height: 120,
@@ -159,6 +161,8 @@ class _ContentPageState extends State<ContentPage> {
                                       ),
                                     ),
                                   ),
+                                  //////////////////////////////////////////////////////////////////////
+                                  // Rating
                                   Container(
                                     width: (_width - 80) / 3,
                                     height: 120,
@@ -194,6 +198,8 @@ class _ContentPageState extends State<ContentPage> {
                                       ),
                                     ),
                                   ),
+                                  //////////////////////////////////////////////////////////////////////
+                                  //Vote Count
                                   Container(
                                     width: (_width - 80) / 3,
                                     height: 120,
@@ -206,7 +212,8 @@ class _ContentPageState extends State<ContentPage> {
                                             '${widget.data.vote_count}',
                                             style: TextStyle(
                                                 color: Colors.blueAccent,
-                                                fontSize: 24),
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                           Text(
                                             'Vote Count',
@@ -218,6 +225,7 @@ class _ContentPageState extends State<ContentPage> {
                                       ),
                                     ),
                                   )
+                                  //////////////////////////////////////////////////////////////////////
                                 ],
                               ),
                             ],
@@ -228,7 +236,7 @@ class _ContentPageState extends State<ContentPage> {
                       Container(
                         child: Container(
                           margin: EdgeInsets.only(left: 20),
-                          width: _width,
+                          width: _width -40,
                           height: 0.5,
                           color: textColor,
                         ),
@@ -258,9 +266,18 @@ class _ContentPageState extends State<ContentPage> {
                                 style:
                                     TextStyle(color: whiteColor, fontSize: 14),
                               ),
+                              SizedBox(
+                                height: 8,
+                              ),
                               //Trailers
-
-                              PreloadTraileContent(widget.data.id),
+                              Text(
+                                'Trailers',
+                                style: TextStyle(
+                                    color: whiteColor,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              PreloadTraileContent(widget.data.id,widget.data.backdrop_path),
                             ],
                           ),
                         ),
@@ -278,7 +295,8 @@ class _ContentPageState extends State<ContentPage> {
 
 class PreloadTraileContent extends StatefulWidget {
   final int movieID;
-  PreloadTraileContent(this.movieID);
+  String backPost;
+  PreloadTraileContent(this.movieID,this.backPost);
   @override
   _PreloadTraileContentState createState() => _PreloadTraileContentState();
 }
@@ -297,8 +315,8 @@ class _PreloadTraileContentState extends State<PreloadTraileContent> {
             print('Hi trailes');
             return Container(
                 width: MediaQuery.of(context).size.width - 40,
-                height: (snapshotTrailer.data.results.length / 2) * 300.0,
-                child: TrailerPage(snapshotTrailer));
+                height: ((snapshotTrailer.data.results.length / 2).round()) * 150.0,
+                child: TrailerPage(snapshotTrailer,widget.backPost));
           } else {
             print('NO trailes');
             return Text(

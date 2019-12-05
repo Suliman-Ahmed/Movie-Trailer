@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_trailer/Pages/upcoming_movies.dart';
 import 'package:flutter_movie_trailer/models/genre_model.dart';
 import 'package:flutter_movie_trailer/ui/colors.dart';
 import 'package:flutter_movie_trailer/ui/popular_movie.dart';
@@ -64,6 +65,8 @@ class _ContantState extends State<Content> {
               RecentMovies(widget.snapshotGene),
               Recent('Popular'),
               PopularMovies(widget.snapshotGene),
+              Recent('Upcoming Movies'),
+              UpcomingMovies(widget.snapshotGene),
             ],
           )
         ]));

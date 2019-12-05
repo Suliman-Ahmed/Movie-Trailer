@@ -5,7 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class TrailerPage extends StatefulWidget {
   AsyncSnapshot<TrailerModel> snapshot;
-  TrailerPage(this.snapshot);
+  String backPost;
+  TrailerPage(this.snapshot,this.backPost);
   @override
   _TrailerPageState createState() => _TrailerPageState();
 }
@@ -43,7 +44,7 @@ class _TrailerPageState extends State<TrailerPage> {
                       margin: EdgeInsets.only(bottom: 5),
                       child: Stack(
                         children: <Widget>[
-                          Image.network(''),
+                          Image.network('${widget.backPost}'),
                           Container(
                             width: itemWidth,
                             height: 90,

@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_movie_trailer/ui/home_screen.dart';
+
+
 void main() => runApp(
   MaterialApp(
     debugShowCheckedModeBanner: false,

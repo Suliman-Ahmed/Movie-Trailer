@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_trailer/Pages/popular_movie.dart';
+import 'package:flutter_movie_trailer/Pages/popular_tv_series.dart';
 import 'package:flutter_movie_trailer/Pages/upcoming_movies.dart';
 import 'package:flutter_movie_trailer/models/genre_model.dart';
 import 'package:flutter_movie_trailer/ui/colors.dart';
-import 'package:flutter_movie_trailer/ui/popular_movie.dart';
 import 'package:flutter_movie_trailer/ui/recent_movie.dart';
 import 'package:flutter_movie_trailer/ui/recent_seeall.dart';
 
@@ -17,13 +17,13 @@ class Content extends StatefulWidget {
 }
 
 class _ContantState extends State<Content> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     print(widget.snapshotGene);
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +43,6 @@ class _ContantState extends State<Content> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              
               SizedBox(
                 height: 6,
               ),
@@ -57,15 +56,21 @@ class _ContantState extends State<Content> {
               SizedBox(
                 height: 6,
               ),
-              Container( width: MediaQuery.of(context).size.width - 30, height: 0.5, color: textColor,),
+              Container(
+                width: MediaQuery.of(context).size.width - 30,
+                height: 0.5,
+                color: textColor,
+              ),
               SizedBox(
                 height: 6,
               ),
-              Recent('Recent'),
+              Recent('Recent','Now Playing',widget.snapshotGene),
               RecentMovies(widget.snapshotGene),
-              Recent('Popular'),
+              Recent('Popular Movies','Popular',widget.snapshotGene),
               PopularMovies(widget.snapshotGene),
-              Recent('Upcoming Movies'),
+              Recent('Popular Series','Popular Series',widget.snapshotGene),
+              PopularSeries(widget.snapshotGene),
+              Recent('Upcoming Movies','Upcaming',widget.snapshotGene),
               UpcomingMovies(widget.snapshotGene),
             ],
           )

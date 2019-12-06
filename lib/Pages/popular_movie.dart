@@ -3,8 +3,7 @@ import 'package:flutter_movie_trailer/blocks/movies_popular_bloc.dart';
 import 'package:flutter_movie_trailer/models/genre_model.dart';
 import 'package:flutter_movie_trailer/models/item_model.dart';
 import 'package:flutter_movie_trailer/ui/colors.dart';
-
-import 'movie_details.dart';
+import 'package:flutter_movie_trailer/ui/movie_details.dart';
 
 class PopularMovies extends StatefulWidget {
   AsyncSnapshot<GenreModel> snapshotGenre;
@@ -50,7 +49,7 @@ class _ItemsPopularLoadState extends State<ItemsPopularLoad> {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: widget.snapshot.data.result.length,
+      itemCount: 5,
       itemBuilder: (context, int index) {
         String genres = widget.snapshotGene.data
             .getGenre(widget.snapshot.data.result[index].genre_ids);

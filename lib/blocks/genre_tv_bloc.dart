@@ -2,17 +2,12 @@ import 'package:flutter_movie_trailer/models/genre_model.dart';
 import 'package:flutter_movie_trailer/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
-class GenreBlock{
+class GenreTvBlock{
   final repository = Repository();
   final movieFetcher = PublishSubject<GenreModel>();
 
-  Observable<GenreModel> get allMovies => movieFetcher.stream;
+  Observable<GenreModel> get allGen => movieFetcher.stream;
 
-  fetchAllGenre() async {
-    GenreModel itemModel = await repository.fetchGenre();
-    movieFetcher.sink.add(itemModel);
-  }
-  
   fetchAllTvGenre() async {
     GenreModel itemModel = await repository.fetchTvGenre();
     movieFetcher.sink.add(itemModel);
@@ -23,4 +18,4 @@ class GenreBlock{
   }
 }
 
-final blocGenre = GenreBlock();
+final blocTvGenre = GenreTvBlock();

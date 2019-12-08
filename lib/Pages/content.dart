@@ -19,13 +19,13 @@ class Content extends StatefulWidget {
 class _ContantState extends State<Content> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     print(widget.snapshotGene);
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
         padding: EdgeInsets.only(left: 20, top: 30),
         width: MediaQuery.of(context).size.width,

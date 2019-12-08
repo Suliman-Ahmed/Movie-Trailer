@@ -5,7 +5,6 @@ class GenreModel {
   var results = [];
 
   GenreModel.fromJson(Map<String, dynamic> parsedJson) {
-    
     List<Result> temp = [];
 
     for (var i = 0; i < parsedJson['genres'].length; i++) {
@@ -17,15 +16,17 @@ class GenreModel {
 
     results = temp;
   }
+
   List<Result> get getGenres => results;
+
   String getGenre(List<int> ids) {
-    ids =ids.toSet().toList();
-    String myGenre ='';
+    ids = ids.toSet().toList();
+    String myGenre = '';
     for (var i = 0; i < ids.length; i++) {
       myGenre += results.where((user) => user.id == ids[i]).first.name + ', ';
     }
 
-    myGenre = myGenre.substring(0,myGenre.length-2);
+    myGenre = myGenre.substring(0, myGenre.length - 2);
     return myGenre;
   }
 }

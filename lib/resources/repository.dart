@@ -11,6 +11,7 @@ class Repository{
   final tvSeriesProvider = new TvProvider();
 
   Future<TvModel> fetchAllPopularSeries() async => tvSeriesProvider.fetchPopularTVSeries();
+  Future<GenreModel> fetchTvGenre() async => tvSeriesProvider.fetchTvGenreList();
 
   Future<ItemModel> fetchAllMovie() async => movieApiProvider.fetchMovieList(0);
   Future<ItemModel> fetchPopularMovies() async => movieApiProvider.fetchPopularMovieList(1);

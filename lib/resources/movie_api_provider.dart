@@ -17,7 +17,6 @@ class MovieApiProvider {
       final response = await client.get(
           baseURL+'movie/now_playing?api_key=$apikey');
       if (response.statusCode == 200) {
-        print(response.body.toString());
         print('Success');
         return ItemModel.fromJson(jsonDecode(response.body),isRecent);
       } else {
@@ -32,7 +31,6 @@ class MovieApiProvider {
       final response = await client.get(
           baseURL+'movie/popular?api_key=$apikey');
       if (response.statusCode == 200) {
-        print(response.body.toString());
         print('pop Success');
         return ItemModel.fromJson(jsonDecode(response.body),isRecent);
       } else {
@@ -46,7 +44,6 @@ class MovieApiProvider {
       final response = await client.get(
           baseURL+'movie/upcoming?api_key=$apikey');
       if (response.statusCode == 200) {
-        print(response.body.toString());
         print('upcome Success');
         return ItemModel.fromJson(jsonDecode(response.body),isRecent);
       } else {
@@ -60,8 +57,7 @@ class MovieApiProvider {
       final response = await client.get(
           baseURL+'genre/movie/list?api_key=$apikey');
       if (response.statusCode == 200) {
-        print(response.body.toString());
-        print('AE');
+        print('Gen Succsees');
         return GenreModel.fromJson(jsonDecode(response.body));
       } else {
         throw Exception('Faild to load the page');
@@ -75,7 +71,6 @@ class MovieApiProvider {
   Future<TrailerModel> fetchTrailers(int movieId) async {
     print('ENTERED Trailers');
     final response = await client.get(baseURL+'movie/$movieId/videos?api_key=$apikey');
-    print(response.body.toString());
     if (response.statusCode == 200) {
       print('Trailes Load');
       return TrailerModel.fromJson(json.decode(response.body));

@@ -46,7 +46,7 @@ class _ContentPageState extends State<ContentPage> {
               top: 20,
               left: 50,
               child: InkWell(
-                onTap:() => Navigator.pop(context),
+                  onTap: () => Navigator.pop(context),
                   child: Icon(
                     Icons.arrow_back_ios,
                     color: whiteColor,
@@ -102,7 +102,7 @@ class _ContentPageState extends State<ContentPage> {
             left: 10,
             child: GetGenreItems(widget.genres),
           ),
-          
+
           Positioned(
             top: 372,
             child: Container(
@@ -236,7 +236,7 @@ class _ContentPageState extends State<ContentPage> {
                       Container(
                         child: Container(
                           margin: EdgeInsets.only(left: 20),
-                          width: _width -40,
+                          width: _width - 40,
                           height: 0.5,
                           color: textColor,
                         ),
@@ -277,7 +277,8 @@ class _ContentPageState extends State<ContentPage> {
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold),
                               ),
-                              PreloadTraileContent(widget.data.id,widget.data.backdrop_path),
+                              PreloadTraileContent(
+                                  widget.data.id, widget.data.backdrop_path),
                             ],
                           ),
                         ),
@@ -296,7 +297,7 @@ class _ContentPageState extends State<ContentPage> {
 class PreloadTraileContent extends StatefulWidget {
   final int movieID;
   String backPost;
-  PreloadTraileContent(this.movieID,this.backPost);
+  PreloadTraileContent(this.movieID, this.backPost);
   @override
   _PreloadTraileContentState createState() => _PreloadTraileContentState();
 }
@@ -315,8 +316,9 @@ class _PreloadTraileContentState extends State<PreloadTraileContent> {
             print('Hi trailes');
             return Container(
                 width: MediaQuery.of(context).size.width - 40,
-                height: ((snapshotTrailer.data.results.length / 2).round()) * 150.0,
-                child: TrailerPage(snapshotTrailer,widget.backPost));
+                height:
+                    ((snapshotTrailer.data.results.length / 2).round()) * 150.0,
+                child: TrailerPage(snapshotTrailer, widget.backPost));
           } else {
             print('NO trailes');
             return Text(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_movie_trailer/models/genre_model.dart';
 import 'package:flutter_movie_trailer/models/tv_item_model.dart';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart';
@@ -15,7 +16,6 @@ class TvProvider {
       final response = await client.get(
           baseURL+'tv/popular?api_key=$apikey');
       if (response.statusCode == 200) {
-        print(response.body.toString());
         print('Series Success');
         return TvModel.fromJson(jsonDecode(response.body));
       } else {
@@ -23,5 +23,25 @@ class TvProvider {
       }
     
   }
+
+
+
+  Future<GenreModel> fetchTvGenreList() async {
+    print('Enterd Gen');
+    try {
+      final response = await client.get(
+          baseURL+'genre/tv/list?api_key=$apikey');
+      if (response.statusCode == 200) {
+        print(response.body.toString());
+        print('AE');
+        return GenreModel.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('Faild to load the page');
+      }
+    } catch (e) {
+      return e;
+    }
+  } 
+
 
 }

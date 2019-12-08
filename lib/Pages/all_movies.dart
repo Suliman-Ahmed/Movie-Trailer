@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_trailer/blocks/movies_block.dart';
-import 'package:flutter_movie_trailer/blocks/movies_popular_bloc.dart';
 import 'package:flutter_movie_trailer/models/genre_model.dart';
 import 'package:flutter_movie_trailer/models/item_model.dart';
 import 'package:flutter_movie_trailer/ui/colors.dart';
